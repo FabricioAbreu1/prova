@@ -16,58 +16,33 @@ if( isset ($_POST ) && !empty($_POST) ){
     $resultado = mysqli_query($conexao, $query);
 }
 ?>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Página do Simulado</title>
+</head>
+<body>
+
+<h1>Página de Simulado</h1>
+
+<h2>Perguntas</h2>
 
 <form action="./index.php" method="post">
 
-<label>Pergunta</label>
-<textarea name="pergunta"></textarea>
 
-
-<br><br>
-
-<label>A)</label>
-<input type="radio" name="correta" value="A" />
-<input type="text" name="A" />
-
-<br><br>
-
-<label>B)</label>
-<input type="radio" name="correta" value="B" />
-<input type="text" name="B" />
-
-<br><br>
-
-<label>C)</label>
-<input type="radio" name="correta" value="C" />
-<input type="text" name="C" />
-
-<br><br>
-
-<label>D)</label>
-<input type="radio" name="correta" value="D" />
-<input type="text" name="D" />
-
-<br><br>
-
-<label>E)</label>
-<input type="radio" name="correta" value="E" />
-<input type="text" name="E" />
-
-<br><br>
-
-<button type="submit">Salvar Pergunta</button>
-
-</form>
 
 <?php
-    $query = "select * from questoes order by id desc";
+$query = "select * from questoes order by rand() limit 15";
     $resultado = mysqli_query($conexao, $query);
 
     while($linha = mysqli_fetch_array($resultado)){
         ?>
+        
             <div style="width:100%; border:1px solid;">
+            
                 <h1> <?php echo $linha["pergunta"]; ?> </h1>
-                <h3> <?php echo $linha["a"]; ?> </h3>
+             <input class= "form-check-input" type = "radio" name="respostas" <?php echo $linha["a"]; ?> />
                 <h3> <?php echo $linha["b"]; ?> </h3>
                 <h3> <?php echo $linha["c"]; ?> </h3>
                 <h3> <?php echo $linha["d"]; ?> </h3>
@@ -76,3 +51,6 @@ if( isset ($_POST ) && !empty($_POST) ){
         <?php
     }
 ?>
+
+
+
